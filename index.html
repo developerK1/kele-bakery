@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KK Bakery Loading Animation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f9f0ff, #fff0f5);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .loading-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .doughnut {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #8a2be2 0% 25%, 
+                #ff0000 25% 50%, 
+                #8a2be2 50% 75%, 
+                #ff0000 75% 100%
+            );
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: rotate 4s linear infinite;
+        }
+
+        .doughnut::before {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f9f0ff, #fff0f5);
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-container {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .bakery-name {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #8a2be2, #ff0000);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .loading-text {
+            font-size: 18px;
+            color: #5a189a;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .sprinkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .sprinkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff0000, #8a2be2);
+            opacity: 0;
+        }
+
+        .pastry-icon {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            opacity: 0;
+            z-index: 5;
+        }
+
+        .croissant {
+            top: 30px;
+            left: 60px;
+            fill: #ffd700;
+        }
+
+        .cookie {
+            bottom: 40px;
+            right: 60px;
+            fill: #d2691e;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .baking-text {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #5a189a;
+            text-align: center;
+            max-width: 250px;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container">
+        <div class="doughnut"></div>
+        
+        <div class="sprinkles" id="sprinkles"></div>
+        
+        <div class="text-container">
+            <div class="bakery-name">KK Bakery</div>
+            <div class="loading-text">Freshly Baking</div>
+        </div>
+        
+        <svg class="pastry-icon croissant" viewBox="0 0 24 24">
+            <path d="M21.15,12.58c-0.51,0.93-1.45,1.52-2.46,1.52c-0.05,0-0.1,0-0.15-0.01c-1.12-0.12-2.03-1.03-2.15-2.15 c-0.01-0.05-0.01-0.1-0.01-0.15c0-1.01,0.59-1.95,1.52-2.46c0.5-0.27,0.81-0.78,0.81-1.35c0-0.83-0.67-1.5-1.5-1.5 c-0.57,0-1.08,0.31-1.35,0.81c-0.51,0.93-1.45,1.52-2.46,1.52c-0.05,0-0.1,0-0.15-0.01c-1.12-0.12-2.03-1.03-2.15-2.15 C9.97,5.6,9.96,5.55,9.96,5.5c0-0.83-0.67-1.5-1.5-1.5S6.96,4.67,6.96,5.5c0,0.57,0.31,1.08,0.81,1.35 c0.93,0.51,1.52,1.45,1.52,2.46c0,0.05,0,0.1-0.01,0.15c-0.12,1.12-1.03,2.03-2.15,2.15c-0.05,0.01-0.1,0.01-0.15,0.01 c-1.01,0-1.95-0.59-2.46-1.52C4.31,10.08,3.8,9.77,3.23,9.77c-0.83,0-1.5,0.67-1.5,1.5s0.67,1.5,1.5,1.5 c0.57,0,1.08-0.31,1.35-0.81c0.51-0.93,1.45-1.52,2.46-1.52c0.05,0,0.1,0,0.15,0.01c1.12,0.12,2.03,1.03,2.15,2.15 c0.01,0.05,0.01,0.1,0.01,0.15c0,1.01-0.59,1.95-1.52,2.46c-0.5,0.27-0.81,0.78-0.81,1.35c0,0.83,0.67,1.5,1.5,1.5 s1.5-0.67,1.5-1.5c0-0.57-0.31-1.08-0.81-1.35c-0.93-0.51-1.52-1.45-1.52-2.46c0-0.05,0-0.1,0.01-0.15 c0.12-1.12,1.03-2.03,2.15-2.15c0.05-0.01,0.1-0.01,0.15-0.01c1.01,0,1.95,0.59,2.46,1.52c0.27,0.5,0.78,0.81,1.35,0.81 c0.83,0,1.5-0.67,1.5-1.5S21.98,12.31,21.15,12.58z"/>
+        </svg>
+        
+        <svg class="pastry-icon cookie" viewBox="0 0 24 24">
+            <path d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,20c-4.42,0-8-3.58-8-8s3.58-8,8-8 s8,3.58,8,8S16.42,20,12,20z"/>
+            <circle cx="8.5" cy="10.5" r="1.5"/>
+            <circle cx="15.5" cy="10.5" r="1.5"/>
+            <circle cx="8.5" cy="15.5" r="1.5"/>
+            <circle cx="15.5" cy="15.5" r="1.5"/>
+            <circle cx="12" cy="8" r="1.5"/>
+            <circle cx="12" cy="13" r="1.5"/>
+            <circle cx="12" cy="18" r="1.5"/>
+        </svg>
+        
+        <div class="baking-text">Preparing fresh pastries with love and premium ingredients</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create sprinkles
+            const sprinklesContainer = document.getElementById('sprinkles');
+            for (let i = 0; i < 30; i++) {
+                const sprinkle = document.createElement('div');
+                sprinkle.classList.add('sprinkle');
+                
+                // Random position
+                const angle = Math.random() * Math.PI * 2;
+                const radius = 80 + Math.random() * 40;
+                const x = 100 + Math.cos(angle) * radius;
+                const y = 100 + Math.sin(angle) * radius;
+                
+                sprinkle.style.left = `${x}px`;
+                sprinkle.style.top = `${y}px`;
+                
+                // Random size
+                const size = 4 + Math.random() * 4;
+                sprinkle.style.width = `${size}px`;
+                sprinkle.style.height = `${size}px`;
+                
+                // Random color - purple or red
+                sprinkle.style.background = Math.random() > 0.5 
+                    ? 'linear-gradient(135deg, #8a2be2, #6a1b9a)' 
+                    : 'linear-gradient(135deg, #ff0000, #c62828)';
+                
+                sprinklesContainer.appendChild(sprinkle);
+            }
+            
+            // Animation timeline
+            const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
+            
+            // Sprinkles animation
+            tl.to('.sprinkle', {
+                opacity: 1,
+                duration: 0.4,
+                stagger: 0.05,
+                ease: "power1.inOut"
+            });
+            
+            tl.to('.sprinkle', {
+                opacity: 0,
+                duration: 0.4,
+                stagger: 0.05,
+                ease: "power1.inOut"
+            }, "+=0.5");
+            
+            // Pastry icons animation
+            tl.to('.croissant', {
+                opacity: 1,
+                scale: 1.2,
+                duration: 0.5,
+                ease: "back.out(1.7)"
+            }, "-=0.4");
+            
+            tl.to('.croissant', {
+                opacity: 0,
+                scale: 0.8,
+                duration: 0.5,
+                ease: "power1.in"
+            }, "+=0.5");
+            
+            tl.to('.cookie', {
+                opacity: 1,
+                scale: 1.2,
+                duration: 0.5,
+                ease: "back.out(1.7)"
+            }, "-=0.4");
+            
+            tl.to('.cookie', {
+                opacity: 0,
+                scale: 0.8,
+                duration: 0.5,
+                ease: "power1.in"
+            }, "+=0.5");
+            
+            // Text animation
+            tl.to('.loading-text', {
+                text: "Freshly Baking...",
+                duration: 1,
+                ease: "none",
+                repeat: 1,
+                yoyo: true,
+                repeatDelay: 0.5
+            }, 0);
+            
+            // Color pulse for bakery name
+            tl.to('.bakery-name', {
+                background: 'linear-gradient(135deg, #ff0000, #8a2be2)',
+                duration: 2,
+                ease: "sine.inOut",
+                yoyo: true,
+                repeat: 1
+            }, 0);
+        });
+		
+		setTimeout(()=> window.location.href = "bakery/index.html", 4500);
+    </script>
+</body>
+</html>
